@@ -7,7 +7,7 @@ var cookieParser = require("cookie-parser");
 const taskRouter = require("./route/taskRoute.js");
 
 const indexRouter = require("./route/IndexRoute.js");
-const port = 3000;
+const port = env.process.PORT;
 const userRouter = require("./route/userRoute");
 
 app.use(express.urlencoded({ extended: false }));
