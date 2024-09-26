@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongodb = require("./connection.js");
