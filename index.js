@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongodb = require("./connection.js");
@@ -7,7 +8,7 @@ var cookieParser = require("cookie-parser");
 const taskRouter = require("./route/taskRoute.js");
 
 const indexRouter = require("./route/IndexRoute.js");
-const port = env.process.PORT;
+const port = process.env.PORT;
 const userRouter = require("./route/userRoute");
 
 app.use(express.urlencoded({ extended: false }));
