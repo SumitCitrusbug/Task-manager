@@ -1,6 +1,7 @@
 const Task = require("../model/task.model.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
 //index page
 
@@ -8,9 +9,7 @@ async function taskPage(req, res) {
   res.render("indextask");
 }
 async function readtaskPage(req, res) {
-  console.log(req.user.id);
   const task = await Task.find({ createdBy: req.user.id });
-  console.log(task);
   const userName = req.user.name;
   res.render("readtask", { alltask: task, userName: userName });
 }
@@ -45,12 +44,15 @@ async function getTaskById(req, res) {
 }
 
 async function createTask(req, res) {
+  console.log(req.file);
   try {
     const result = await Task.create({
       title: req.body.title,
       description: req.body.description,
       createdBy: req.user.id,
+      image: req.file.filename,
     });
+    console.log(result);
     return res.redirect("/readtask");
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -61,9 +63,6 @@ async function createTask(req, res) {
       });
       return res.status(400).json({ error: errors });
     }
-    return res
-      .status(500)
-      .json({ error: "An error occurred while creating the task." });
   }
 }
 

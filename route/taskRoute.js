@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middelware/auth.middelware");
+const upload = require("../utiles/upload");
 //impoer controler
 const {
   getTask,
@@ -12,7 +13,7 @@ const {
 
 router
   .get("/", getTask)
-  .post("/", auth, createTask)
+  .post("/", auth, upload.single("image"), createTask)
   .get("/:id", getTaskById)
   .get("/delete/:id", deleteTask)
   .post("/edit/:id", updateTask);

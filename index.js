@@ -12,9 +12,10 @@ const userRouter = require("./route/userRoute");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-//public path
+
 app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname, "public")));
+
 //ejs
 app.set("view engine", "ejs");
 app.use(cookieParser());
